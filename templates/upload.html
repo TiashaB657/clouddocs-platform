@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Upload</title>
+</head>
+<body>
+
+<h1>Upload Document</h1>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+</form>
+<form action="/files" method="GET">
+    <button type="submit">Show Files</button>
+</form>
+
+</body>
+</html>
