@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clouddocs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clouddocs
+  template:
+    metadata:
+      labels:
+        app: clouddocs
+    spec:
+      containers:
+        - name: clouddocs
+          image: 993391630152.dkr.ecr.ap-south-1.amazonaws.com/clouddocs:v3
+          ports:
+            - containerPort: 5000
