@@ -4,7 +4,7 @@ __pycache__/
 .env
 
 uploads/
-
+terraform/lambda.zip
 .terraform/
 *.tfstate
 *.tfstate.*
