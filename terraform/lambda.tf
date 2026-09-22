@@ -12,6 +12,7 @@ resource "aws_lambda_function" "clouddocs" {
   environment {
     variables = {
       DYNAMODB_TABLE = aws_dynamodb_table.metadata.name
+      S3_BUCKET      = aws_s3_bucket.clouddocs.bucket
     }
   }
 
@@ -21,7 +22,7 @@ resource "aws_lambda_function" "clouddocs" {
 
   depends_on = [
     aws_iam_role_policy_attachment.lambda_basic_execution,
-    aws_iam_role_policy.lambda_dynamodb_access
+    aws_iam_role_policy.lambda_cloud_docs_access
   ]
 }
 resource "aws_apigatewayv2_api" "clouddocs" {
@@ -54,8 +55,8 @@ resource "aws_apigatewayv2_route" "lambda" {
 resource "aws_apigatewayv2_stage" "default" {
   api_id = aws_apigatewayv2_api.clouddocs.id
 
-  name          = "$default"
-  auto_deploy   = true
+  name        = "$default"
+  auto_deploy = true
 }
 
 resource "aws_lambda_permission" "api_gateway" {

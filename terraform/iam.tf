@@ -163,8 +163,8 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-resource "aws_iam_role_policy" "lambda_dynamodb_access" {
-  name = "${var.project_name}-Lambda-DynamoDB-Access"
+resource "aws_iam_role_policy" "lambda_cloud_docs_access" {
+  name = "${var.project_name}-Lambda-CloudDocs-Access"
   role = aws_iam_role.lambda_role.id
 
   policy = jsonencode({
@@ -179,6 +179,15 @@ resource "aws_iam_role_policy" "lambda_dynamodb_access" {
         ]
 
         Resource = aws_dynamodb_table.metadata.arn
+      },
+      {
+        Effect = "Allow"
+
+        Action = [
+          "s3:GetObject"
+        ]
+
+        Resource = "${aws_s3_bucket.clouddocs.arn}/*"
       }
     ]
   })
