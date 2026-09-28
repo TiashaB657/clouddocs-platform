@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "clouddocs" {
   bucket = "clouddocs-platform-tiasha-mumbai"
+  force_destroy = true
 
   tags = {
     Name = "${var.project_name}-S3"
@@ -13,4 +14,6 @@ resource "aws_s3_bucket_public_access_block" "clouddocs" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+  
 }
+
